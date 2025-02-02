@@ -510,7 +510,7 @@ class CayleyGraph:
         :param state_start                     : torch.tensor - from where to search
                                         
         # model, if not registered
-        :param models_or_heuristics            : nn.Module / Predictor / str / function / something with .predict or .__call__ methods
+        :param             : nn.Module / Predictor / str / function / something with .predict or .__call__ methods
         :param models_or_heuristics_batching   : boolean / do we need batching of data for a model
         :param models_or_heuristics_lazy       : boolean / do we must reload model
 
@@ -842,7 +842,7 @@ class CayleyGraph:
                 # Estimate distance of new states to the destination state (or best moves probabilities for policy models)
                 t1 = time.time()
 
-                estimations_for_new_states = self.predictor(array_of_states_new, self)
+                estimations_for_new_states = self.predictor(array_of_states_new.to(torch.float32), self)
                 #print_estimations_for_new_states
                 if print_mode == 'Beam stat each step':
                     if (i_step <100) or ( ((i_step % 10) == 0) and (i_step < 1000) )  or ( ((i_step % 100) == 0)  ): 
